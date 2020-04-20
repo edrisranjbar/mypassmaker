@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: passmaker
+Version: 0.0.2
+Summary: Generate secure password
+Home-page: https://github.com/edrisranjbar/secure_password_generator
+Author: Edris Ranjbar
+Author-email: edris.qeshm2@gmail.com
+License: MIT
+Description: # Random-password
+        <b>make secure <i>passwords</i> for your accounts</b>
+        --------------------------------------------------------
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

@@ -1,0 +1,7 @@
+README.md
+setup.py
+mypassmaker/__init__.py
+mypassmaker.egg-info/PKG-INFO
+mypassmaker.egg-info/SOURCES.txt
+mypassmaker.egg-info/dependency_links.txt
+mypassmaker.egg-info/top_level.txt

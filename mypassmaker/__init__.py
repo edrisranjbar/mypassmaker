@@ -1,10 +1,10 @@
 class Password:
     @staticmethod
-    def generate(length: int = 8):
+    def generate(length = 8):
         import string
         import random
         char = string.ascii_letters + string.punctuation + string.digits
-        final_password = "".join(random.choice(char) for x in range(length))
+        final_password = "".join(random.choice(char) for x in range(int(length)))
         return final_password
 
     @staticmethod
@@ -12,7 +12,7 @@ class Password:
         try:
             import smtplib
         except ImportError:
-            return False
+            raise Exception("Please first install smtplib via: pip install smtplib")
         subject = "Here's Your Secure password"
         print(content)
 

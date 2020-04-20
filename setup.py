@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="mypassmaker",
-    version="0.0.2",
+    version="1.0",
     author="Edris Ranjbar",
     license='MIT',
     packages=['mypassmaker'],

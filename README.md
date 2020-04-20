@@ -10,7 +10,7 @@ my_password = Password.generate(length=10)
 ```
 and if you wanna have your password in your gmail inbox, then you can use ```send_email()``` method like this:
 ```python
-Password.send_email(gmail_user="", gmail_password="", sent_from="", send_to="", my_password="")
+Password.send_email(gmail_user="", gmail_password="", sent_from="", send_to="", my_password=my_password)
 ```
 
 ## How to contribute?

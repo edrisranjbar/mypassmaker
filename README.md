@@ -1,5 +1,6 @@
 # MyPassMaker
-*mypassmaker* is a python package for making strong password and check passwords.
+*mypassmaker* is a python package for making strong password and checking password's safety.
+<br><br>
 [![Downloads](https://pepy.tech/badge/mypassmaker)](https://pepy.tech/project/mypassmaker)
 
 ## How yo use?

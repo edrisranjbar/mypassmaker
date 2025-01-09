@@ -5,12 +5,12 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="mypassmaker",
-    version="1.0",
+    version="1.2",
     author="Edris Ranjbar",
     license='MIT',
     packages=['mypassmaker'],
     author_email="edris.qeshm2@gmail.com",
-    description="Generate secure password",
+    description="Generate and safty check secure password",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/edrisranjbar/secure_password_generator",

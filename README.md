@@ -32,6 +32,29 @@ my_password = Password.generate(length=10)
 print(my_password)
 ```
 
+### Checking Password Safety
+The check_safety() method evaluates the safety of a password based on various criteria and returns a score between 0 and 10. The following criteria are checked:
+
+- Length (>= 8)
+- Not in the passlist (stored in passlist.txt)
+- Contains special characters
+- Contains both uppercase and lowercase letters
+- Contains numbers (and not a number-only password)
+
+```python
+from mypassmaker import Password
+
+password = "A1!strongPass"
+safety_score = Password.check_safety(password)
+
+print(f"Password Safety Score: {safety_score}/10")
+```
+
+### Example Scoring
+- 10: Perfect password with length, complexity, and variety.
+- 5: A password that meets some but not all safety criteria.
+- 0: A weak password that fails several checks.
+
 ## How to Contribute
 We appreciate your interest in contributing to MyPassMaker! Here's how you can help:
 

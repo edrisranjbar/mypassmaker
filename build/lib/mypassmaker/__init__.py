@@ -100,13 +100,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "--digits", "-d", action="store_true", help="use digits in password"
     )
+    parser.add_argument(
+        "--count", "-c", type=int, help="The number of passwords to be generated.",default=1
+    )
 
     args = parser.parse_args()
-    password = Password.generate(
+    for i in range(args.count):
+        password = Password.generate(
         length=args.length,
         upper_case=args.upper_case,
         lower_case=args.lower_case,
         special_char=args.special_char,
         digits=args.digits,
-    )
-    print(password)
+        )
+        print(password)

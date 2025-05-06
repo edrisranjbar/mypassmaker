@@ -2,6 +2,9 @@ import string
 import random
 import argparse
 import os
+import json
+import csv
+from typing import List, Union
 
 
 class Password:
@@ -111,6 +114,36 @@ class Password:
 
         return safety_level
 
+    @staticmethod
+    def save_to_file(passwords: List[str], output_file: str, format: str = "txt"):
+        """
+        Save generated passwords to a file in the specified format.
+
+        Args:
+            passwords (List[str]): List of passwords to save
+            output_file (str): Path to the output file
+            format (str): Output format ('txt', 'json', or 'csv')
+        """
+        if not passwords:
+            raise ValueError("No passwords to save")
+
+        os.makedirs(os.path.dirname(output_file) or ".", exist_ok=True)
+
+        if format == "txt":
+            with open(output_file, "w") as f:
+                f.write("\n".join(passwords))
+        elif format == "json":
+            with open(output_file, "w") as f:
+                json.dump({"passwords": passwords}, f, indent=2)
+        elif format == "csv":
+            with open(output_file, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["password"])
+                for password in passwords:
+                    writer.writerow([password])
+        else:
+            raise ValueError(f"Unsupported format: {format}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A Strong password generator")
@@ -141,11 +174,19 @@ if __name__ == "__main__":
     parser.add_argument(
         "--separator", "-sep", type=str, help="Separator character for passphrase words", default="-"
     )
+    parser.add_argument(
+        "--output", "-o", type=str, help="Output file to save passwords"
+    )
+    parser.add_argument(
+        "--format", "-f", type=str, choices=["txt", "json", "csv"], default="txt",
+        help="Output format (txt, json, or csv)"
+    )
 
     args = parser.parse_args()
     if args.count < 1:
         parser.error("--count must be a positive integer (>= 1)")
     
+    passwords = []
     for i in range(args.count):
         if args.passphrase:
             password = Password.generate_passphrase(length=args.words, separator=args.separator)
@@ -157,4 +198,12 @@ if __name__ == "__main__":
                 special_char=args.special_char,
                 digits=args.digits,
             )
+        passwords.append(password)
         print(password)
+
+    if args.output:
+        try:
+            Password.save_to_file(passwords, args.output, args.format)
+            print(f"\nPasswords saved to {args.output} in {args.format} format")
+        except Exception as e:
+            print(f"Error saving passwords: {e}")

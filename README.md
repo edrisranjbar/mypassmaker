@@ -11,6 +11,7 @@
 - Generate memorable passphrases using a wordlist
 - Password safety evaluation
 - Command-line interface with various options
+- Save generated passwords to files (TXT, JSON, CSV)
 
 ## Installation
 
@@ -35,10 +36,18 @@ Options for random password generation:
 - `--special_char` or `-s`: Include special characters
 - `--digits` or `-d`: Include digits
 - `--count` or `-c`: Number of passwords to generate (default: 1)
+- `--output` or `-o`: Save passwords to a file
+- `--format` or `-f`: Output format (txt, json, csv) (default: txt)
 
 Example:
 ```bash
+# Generate and display passwords
 python -m mypassmaker --length 12 --upper_case --lower_case --special_char --digits
+
+# Generate and save passwords to a file
+python -m mypassmaker --length 16 --count 5 --output passwords.txt
+python -m mypassmaker --length 16 --count 5 --output passwords.json --format json
+python -m mypassmaker --length 16 --count 5 --output passwords.csv --format csv
 ```
 
 ### Generate Passphrases
@@ -51,10 +60,16 @@ Options for passphrase generation:
 - `--words` or `-w`: Number of words in passphrase (default: 4)
 - `--separator` or `-sep`: Character to separate words (default: '-')
 - `--count` or `-c`: Number of passphrases to generate (default: 1)
+- `--output` or `-o`: Save passphrases to a file
+- `--format` or `-f`: Output format (txt, json, csv) (default: txt)
 
 Example:
 ```bash
+# Generate and display passphrases
 python -m mypassmaker --passphrase --words 4 --separator "-"
+
+# Generate and save passphrases to a file
+python -m mypassmaker --passphrase --words 4 --count 5 --output passphrases.txt
 ```
 
 This will generate passphrases like "correct-horse-battery-staple" using words from the built-in wordlist.

@@ -105,6 +105,8 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+    if args.count < 1:
+        parser.error("--count must be a positive integer (>= 1)")
     for i in range(args.count):
         password = Password.generate(
         length=args.length,

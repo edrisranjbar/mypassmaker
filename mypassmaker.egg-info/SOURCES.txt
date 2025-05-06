@@ -1,7 +1,9 @@
 LICENSE
+MANIFEST.in
 README.md
 setup.py
 mypassmaker/__init__.py
+mypassmaker/wordlist.txt
 mypassmaker.egg-info/PKG-INFO
 mypassmaker.egg-info/SOURCES.txt
 mypassmaker.egg-info/dependency_links.txt

@@ -1,6 +1,7 @@
 import string
 import random
 import argparse
+import os
 
 
 class Password:
@@ -33,6 +34,34 @@ class Password:
         if digits:
             characters += string.digits
         return "".join(random.choices(characters, k=length))
+
+    @staticmethod
+    def generate_passphrase(length: int = 4, separator: str = "-"):
+        """
+        Generate a memorable passphrase using words from the wordlist.
+
+        Args:
+            length (int): Number of words in the passphrase. Default is 4.
+            separator (str): Character to separate words. Default is '-'.
+
+        Returns:
+            str: A randomly generated passphrase.
+        """
+        if not isinstance(length, int) or length <= 0:
+            raise ValueError("Passphrase length must be a positive integer.")
+
+        wordlist_path = os.path.join(os.path.dirname(__file__), "wordlist.txt")
+        try:
+            with open(wordlist_path, "r") as file:
+                wordlist = [word.strip() for word in file.readlines()]
+        except FileNotFoundError:
+            raise FileNotFoundError("Wordlist file not found. Please ensure wordlist.txt exists.")
+
+        if not wordlist:
+            raise ValueError("Wordlist is empty.")
+
+        words = random.choices(wordlist, k=length)
+        return separator.join(words)
 
     @staticmethod
     def check_safety(password):
@@ -101,18 +130,31 @@ if __name__ == "__main__":
         "--digits", "-d", action="store_true", help="use digits in password"
     )
     parser.add_argument(
-        "--count", "-c", type=int, help="The number of passwords to be generated.",default=1
+        "--count", "-c", type=int, help="The number of passwords to be generated.", default=1
+    )
+    parser.add_argument(
+        "--passphrase", "-p", action="store_true", help="Generate a passphrase instead of a random password"
+    )
+    parser.add_argument(
+        "--words", "-w", type=int, help="Number of words in passphrase", default=4
+    )
+    parser.add_argument(
+        "--separator", "-sep", type=str, help="Separator character for passphrase words", default="-"
     )
 
     args = parser.parse_args()
     if args.count < 1:
         parser.error("--count must be a positive integer (>= 1)")
+    
     for i in range(args.count):
-        password = Password.generate(
-        length=args.length,
-        upper_case=args.upper_case,
-        lower_case=args.lower_case,
-        special_char=args.special_char,
-        digits=args.digits,
-        )
+        if args.passphrase:
+            password = Password.generate_passphrase(length=args.words, separator=args.separator)
+        else:
+            password = Password.generate(
+                length=args.length,
+                upper_case=args.upper_case,
+                lower_case=args.lower_case,
+                special_char=args.special_char,
+                digits=args.digits,
+            )
         print(password)

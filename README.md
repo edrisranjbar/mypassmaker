@@ -1,17 +1,16 @@
 # MyPassMaker
 
-**MyPassMaker** is a Python package designed to help you generate strong passwords and assess their safety.
+**MyPassMaker** is a simple and secure password generator that can create both random passwords and memorable passphrases.
 
 [![Downloads](https://pepy.tech/badge/mypassmaker)](https://pepy.tech/project/mypassmaker)  
 [![GitHub stars](https://img.shields.io/github/stars/edrisranjbar/mypassmaker?style=social)](https://github.com/edrisranjbar/mypassmaker/stargazers)
 
----
-
 ## Features
-- Generate strong, secure passwords.
-- Lightweight and easy to use.
-- Test your password's safety level.
----
+
+- Generate random passwords with customizable length and character sets
+- Generate memorable passphrases using a wordlist
+- Password safety evaluation
+- Command-line interface with various options
 
 ## Installation
 
@@ -21,39 +20,57 @@ Install the package via pip:
 pip install mypassmaker
 ```
 
-## How to Use
-Generate a secure password of a specified length:
+## Usage
 
-```python
-from mypassmaker import Password
+### Generate Random Passwords
 
-# Generate a 10-character password
-my_password = Password.generate(length=10)
-print(my_password)
+```bash
+python -m mypassmaker [options]
 ```
 
-### Checking Password Safety
-The check_safety() method evaluates the safety of a password based on various criteria and returns a score between 0 and 10. The following criteria are checked:
+Options for random password generation:
+- `--length` or `-len`: Password length (default: 8)
+- `--upper_case` or `-u`: Include uppercase letters
+- `--lower_case` or `-l`: Include lowercase letters
+- `--special_char` or `-s`: Include special characters
+- `--digits` or `-d`: Include digits
+- `--count` or `-c`: Number of passwords to generate (default: 1)
 
-- Length (>= 8)
-- Not in the passlist (stored in passlist.txt)
-- Contains special characters
-- Contains both uppercase and lowercase letters
-- Contains numbers (and not a number-only password)
-
-```python
-from mypassmaker import Password
-
-password = "A1!strongPass"
-safety_score = Password.check_safety(password)
-
-print(f"Password Safety Score: {safety_score}/10")
+Example:
+```bash
+python -m mypassmaker --length 12 --upper_case --lower_case --special_char --digits
 ```
 
-### Example Scoring
-- 10: Perfect password with length, complexity, and variety.
-- 5: A password that meets some but not all safety criteria.
-- 0: A weak password that fails several checks.
+### Generate Passphrases
+
+```bash
+python -m mypassmaker --passphrase [options]
+```
+
+Options for passphrase generation:
+- `--words` or `-w`: Number of words in passphrase (default: 4)
+- `--separator` or `-sep`: Character to separate words (default: '-')
+- `--count` or `-c`: Number of passphrases to generate (default: 1)
+
+Example:
+```bash
+python -m mypassmaker --passphrase --words 4 --separator "-"
+```
+
+This will generate passphrases like "correct-horse-battery-staple" using words from the built-in wordlist.
+
+## Password Safety
+
+The tool includes a safety evaluation feature that checks:
+- Password length (>= 8)
+- Presence in common password lists
+- Use of special characters
+- Mix of uppercase and lowercase letters
+- Inclusion of numbers
+
+## License
+
+MIT License
 
 ## How to Contribute
 We appreciate your interest in contributing to MyPassMaker! Here's how you can help:
@@ -63,11 +80,11 @@ We appreciate your interest in contributing to MyPassMaker! Here's how you can h
 3. Write tests to ensure your changes work as expected.
 4. Submit a Pull Request (PR) with a description of your changes.
 
-We’ll review your PR and merge it if it aligns with the project goals.
+We'll review your PR and merge it if it aligns with the project goals.
 
 ## Contact Us
 
-We’d love to hear from you! Whether you have feedback, suggestions, or questions, feel free to reach out:
+We'd love to hear from you! Whether you have feedback, suggestions, or questions, feel free to reach out:
 
 - **Email**: [edris.qeshm2@gmail.com](mailto:edris.qeshm2@gmail.com)  
 - **Website**: [www.edrisranjbar.ir](http://www.edrisranjbar.ir)  
